@@ -178,7 +178,7 @@ nav.onscroll {
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .nav-links button {
