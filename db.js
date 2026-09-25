@@ -125,7 +125,7 @@ const portfolioData = {
     ],
 
     links: {
-        Linkedin:"https://www.linkedin.com/in/benjamin-j-alani-1a0b4b1b3/",
+        Linkedin:"https://in.linkedin.com/in/benjamin-j-8282b42a3",
         Github:"https://github.com/benjaminjalani",
         Email:"mailto:benjaminjalani@gmail.com",
     },
