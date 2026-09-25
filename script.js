@@ -51,37 +51,165 @@ function playDrawIntro(options = {}) {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  playDrawIntro({
-    text: 'BJA',
-    tagline: 'Benjamin J Alani — portfolio',
-    drawMs: 2200,
-    accentColor: '#f0e119'
-  });
+function renderPortfolioData()
+{
+  if(!window.portfolioData)
+  {
+    console.error("Portfolio data not found.");
+    return;
+  }
+
+  const data = window.portfolioData;
+
+  const aboutBadge = document.getElementById('about-badge');
+  const aboutName = document.getElementById('about-name');
+  const aboutSubtitle = document.getElementById('about-subtitle');
+  const aboutTags = document.getElementById('about-tags');
+  const aboutBadge2 = document.getElementById('about-back-badge');
+  const aboutBiography = document.getElementById('about-biography');
+
+  if(aboutBadge) 
+    aboutBadge.textContent = data.about.badge;
+  if(aboutName)
+    aboutName.innerHTML = `${data.personal.firstname} ${data.personal.middlename} <span class="highlight-yellow">${data.personal.lastname}</span>`;
+  if(aboutSubtitle)
+    aboutSubtitle.textContent = data.about.subtitle;
+  if(aboutTags)
+    aboutTags.innerHTML = data.about.tags.map(tag => `<span class="exp-tag">${tag}</span>`).join(' ');
+  if(aboutBadge2)
+    aboutBadge2.textContent = data.about.badge2;
+  if(aboutBiography)
+    aboutBiography.textContent = data.about.biography;
 
 
-  const words = ["CREATIVE", "BCA GRADUATE", "FREELANCE", "DEVELOPER"];
-  const slidingTitle = document.getElementById('sliding-title');
-  let currentIndex = 0;
+  renderSkills();
+  renderProjects();
+  const emailElement = document.getElementById("contact-email");
+    const linkedinElement = document.getElementById("linkedin-link");
+    const githubElement = document.getElementById("github-link");
 
-  if (slidingTitle) {
-    function rotateWords() {
-      slidingTitle.classList.remove('visible');
-      setTimeout(() => {
-        currentIndex = (currentIndex + 1) % words.length;
-        slidingTitle.textContent = words[currentIndex];
-        slidingTitle.classList.add('visible');
-      }, 600);
+    if (emailElement) {
+        emailElement.textContent = data.personal.email;
+        emailElement.href = `mailto:${data.personal.email}`;
     }
 
-    slidingTitle.textContent = words[0];
-    setTimeout(() => {
-      slidingTitle.classList.add('visible');
-    }, 100);
+    if (linkedinElement) {
+        linkedinElement.href = data.links.Linkedin;
+    }
 
-    setInterval(rotateWords, 3200);
+    if (githubElement) {
+        githubElement.href = data.links.Github;
+}
+
+function renderSkills()
+{
+  const bottom = document.getElementById('skills-marquee-track-bottom');
+  const top = document.getElementById('skills-marquee-track-top');
+  if(!bottom)
+    return;
+
+  bottom.innerHTML = window.portfolioData.skills.map((skill ,index) => {
+    return `<div class="skill-card" data-categories="language web">
+
+                    <div class="skill-icon">
+                        <img
+                            src="${skill.icon}"
+                            alt="${skill.name} icon"
+                            width="28"
+                            height="28">
+                    </div>
+                    <span class="skill-cat">
+                        ${skill.category}
+                    </span>
+                    <h3>${skill.name}</h3>
+                </div>
+            `;
+     }).join('');
   }
-});
+}
+
+function renderProjects() 
+{
+    const container = document.getElementById("projects-grid");
+    if (!container) 
+      return;
+    container.innerHTML = portfolioData.projects
+        .map((project, index) => {
+            const position = index + 1;
+            return `
+                <div class="project-card shape-pos-${position}">
+                    <span class="project-tag">
+                        ${project.tag}
+                    </span>
+                    <h3>${project.name}</h3>
+                    <p>${project.description}</p>
+                    <div class="tech-stack">
+                        ${project.stack.join(" &bull; ")}
+                    </div>
+                    <div class="project-links">
+                        <a
+                            href="${project.demo}"
+                            class="btn-demo"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            ${project.demoLabel}
+                        </a>
+                        <a
+                            href="${project.github}"
+                            class="btn-github"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            `;
+        })
+        .join("");
+
+}
+document.addEventListener("DOMContentLoaded", renderPortfolioData);
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderPortfolioData();
+    playDrawIntro({
+        text: "BJA",
+        tagline: `${portfolioData.personal.name} — portfolio`,
+        drawMs: 2200,
+        accentColor: "#f0e119"
+    });
+    const words = [
+        "CREATIVE",
+        "BCA GRADUATE",
+        "FREELANCE",
+        "DEVELOPER"
+    ];
+    const slidingTitle = document.getElementById("sliding-title");
+    let currentIndex = 0;
+    if (slidingTitle) 
+    {
+        function rotateWords() 
+        {
+            slidingTitle.classList.remove("visible");
+            setTimeout(() => {
+                currentIndex =
+                    (currentIndex + 1) % words.length;
+                slidingTitle.textContent =
+                    words[currentIndex];
+                slidingTitle.classList.add("visible");
+            }, 600);
+        }
+        slidingTitle.textContent = words[0];
+        setTimeout(() => {
+            slidingTitle.classList.add("visible");
+        }, 100);
+        setInterval(rotateWords, 3200);
+    }
+    setupSkillMarquees();
+    setupDragScroll("skills-marquee-bottom");
+    setupDragScroll("skills-marquee-top");
+  });
+
 
 
 
@@ -251,47 +379,85 @@ function burstConfetti() {
 renderTTT();
 
 
-const circleOverlay = document.getElementById('profile-overlay');
+function scrollSection(id, amount) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollBy({ left: amount, behavior: 'smooth' });
+  }
+}
 
-function openProfile(e) {
-    if (e) e.preventDefault();
-    circleOverlay.classList.add('active');
-    const island = document.getElementById('dynamic-island');
-    island.classList.remove('island-expanded');
-    island.classList.add('island-collapsed');
-}
-function closeProfile() {
-    circleOverlay.classList.remove('active');
-}
-circleOverlay.addEventListener('click', (e) => {
-    if (e.target === circleOverlay) {
-        closeProfile();
+function setupSkillMarquees() {
+    const bottom = document.getElementById("skills-marquee-track-bottom");
+    const top = document.getElementById("skills-marquee-track-top");
+    if (!bottom) return;
+    const html = bottom.innerHTML;
+    bottom.innerHTML = html + html;
+    if (top) {
+        top.innerHTML = bottom.innerHTML;
     }
+    document.querySelectorAll(".skills-marquee-wrapper").forEach(wrapper => {
+        wrapper.setAttribute("tabindex", "0");
+        wrapper.addEventListener("focus", () => {
+            const track = wrapper.querySelector(".skills-marquee-track");
+            if (track) {
+                track.style.animationPlayState = "paused";
+            }
+        });
+        wrapper.addEventListener("blur", () => {
+            const track = wrapper.querySelector(".skills-marquee-track");
+
+            if (track) {
+                track.style.animationPlayState = "running";
+            }
+        });
+    });
+}
+
+function setupDragScroll(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  el.addEventListener('mousedown', (e) => {
+    isDown = true;
+    el.classList.add('active-drag');
+    startX = e.pageX - el.offsetLeft;
+    scrollLeft = el.scrollLeft;
+  });
+
+  el.addEventListener('mouseleave', () => {
+    isDown = false;
+    el.classList.remove('active-drag');
+  });
+
+  el.addEventListener('mouseup', () => {
+    isDown = false;
+    el.classList.remove('active-drag');
+  });
+
+  el.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    el.scrollLeft = scrollLeft - walk;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setupDragScroll('skills-grid');
+  setupDragScroll('projects-grid');
 });
-
-
-let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-
-function changeSlide(direction) {
-    slides[currentSlideIndex].classList.remove('active-slide');
-    dots[currentSlideIndex].classList.remove('active-dot');
-    currentSlideIndex += direction;
-    if (currentSlideIndex >= slides.length) {
-        currentSlideIndex = 0;
-    } else if (currentSlideIndex < 0) {
-        currentSlideIndex = slides.length - 1;
-    }
-    slides[currentSlideIndex].classList.add('active-slide');
-    dots[currentSlideIndex].classList.add('active-dot');
-}
 
 window.addEventListener("scroll", () => {
     const nav = document.querySelector("nav");
-    if (window.scrollY > 900) {
-        nav.classList.add("onscroll");
-    } else {
-        nav.classList.remove("onscroll");
+    if (nav) {
+      if (window.scrollY > 300) {
+          nav.classList.add("onscroll");
+      } else {
+          nav.classList.remove("onscroll");
+      }
     }
 });

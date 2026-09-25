@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Benjamin J Alani | Portfolio</title>
   
-
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Poppins:wght@300;400;600;800;900&family=Outfit:wght@400;600;800;900&family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -25,7 +24,7 @@
       <div class="nav-logo" data-nav data-idx="0" onclick="document.getElementById('hero').scrollIntoView({ behavior: 'smooth' })"
       ><span>BJA</span></div>
       <div class="nav-links">
-        <button type="button" data-nav data-idx="1" onclick="openProfile(event)">About</button>
+        <button type="button" data-nav data-idx="1" onclick="document.getElementById('about').scrollIntoView({ behavior: 'smooth' })">About</button>
         <button type="button" data-nav data-idx="2" onclick="document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })">Work</button>
         <button type="button" data-nav data-idx="3" onclick="document.getElementById('skills').scrollIntoView({ behavior: 'smooth' })">Skills</button>
         <button type="button" data-nav data-idx="4" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })">Contact</button>   
@@ -55,132 +54,60 @@
         </div>
     </section>
 
-    <section class="about-layer">
-        <div class="hero-action">
-            <button class="epic-trigger-btn" onclick="openProfile(event)">
-                <span class="btn-glow"></span>
-                <span class="btn-text">OPEN PROFILE</span>
-            </button>
+    <section id="about" class="about-layer">
+        <div class="section-header">
+            <span class="subtitle-accent">BIOGRAPHY</span>
+            <h2 class="section-heading">ABOUT ME</h2>
+            <div class="heading-line"></div>
+        </div>
+
+        <div class="big-flip-container">
+            <div class="big-flip-card" id="bigFlipCard" onclick="this.classList.toggle('flipped')">
+                <div class="big-flip-inner">
+                    <!-- FRONT FACE -->
+                    <div class="big-flip-face big-flip-front">
+                        <div class="big-flip-header">
+                            <span class="card-badge mono" id="about-badge"></span>
+                            <span class="flip-badge mono">↺ FLIP</span>
+                        </div>
+                        <h2 class="big-card-title" id="about-name"></span></h2>
+                        <p class="big-card-sub" id="about-subtitle"></p>
+                        
+                        <div class="big-card-tags" id="about-tags"></div>
+                    </div>
+
+                    <!-- BACK FACE -->
+                    <div class="big-flip-face big-flip-back">
+                        <div class="big-flip-header">
+                            <span class="card-badge mono" style="color: #111;" id="about-back-badge"></span>
+                            <span class="flip-badge mono" style="background: rgba(0,0,0,0.1); color: #111; border-color: rgba(0,0,0,0.2);">↺ FLIP BACK</span>
+                        </div>
+                        <h2 class="big-card-title" style="color: #111;">ABOUT ME</h2>
+                        <p class="big-card-bio" id="about-biography"></p>
+                        
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+    
+    
     <section id="skills" class="skills-section">
-        <div class="section-header">
+
+        <!-- Top marquee (left-to-right) -->
+        <div class="skills-marquee-wrapper marquee-top" id="skills-marquee-top">
+            <div class="skills-marquee-track" id="skills-marquee-track-top" aria-hidden="true"></div>
+        </div>
+
+        <div class="section-header" style="margin-top: 4rem;">
             <span class="subtitle-accent">EXPERTISE</span>
             <h2 class="section-heading">TECH STACK &amp; SKILLS</h2>
             <div class="heading-line"></div>
         </div>
 
-        <div class="skills-grid">
-            <div class="skill-card glow-c" data-categories="language">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M16 18a8 8 0 1 1 0-12"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">Core System</span>
-                <h3>C Language</h3>
-            </div>
-
-            <div class="skill-card glow-cpp" data-categories="language">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 18a6 6 0 1 1 0-12"/>
-                        <path d="M16 12h4m-2-2v4m3-2h2"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">High Performance</span>
-                <h3>C++</h3>
-            </div>
-
-            <div class="skill-card glow-java" data-categories="language">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
-                        <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/>
-                        <path d="M6 2v3m4-3v3m4-3v3"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">Enterprise OOP</span>
-                <h3>Java</h3>
-            </div>
-
-            <div class="skill-card glow-js" data-categories="language web">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <path d="M15 9h-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v2a2 2 0 0 1-2 2h-2"/>
-                        <path d="M9 9h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H9"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">Dynamic Interaction</span>
-                <h3>JavaScript</h3>
-            </div>
-
-            <div class="skill-card glow-html" data-categories="web">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">Structure &amp; SEO</span>
-                <h3>HTML5</h3>
-            </div>
-
-            <div class="skill-card glow-css" data-categories="web">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">Design &amp; Motion</span>
-                <h3>CSS3 / Animations</h3>
-            </div>
-
-            <div class="skill-card glow-mysql" data-categories="db">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <ellipse cx="12" cy="5" rx="9" ry="3"/>
-                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-                        <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">Relational DBMS</span>
-                <h3>MySQL</h3>
-            </div>
-
-            <div class="skill-card glow-sqlite" data-categories="db">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
-                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
-                        <line x1="6" y1="6" x2="6.01" y2="6"/>
-                        <line x1="6" y1="18" x2="6.01" y2="18"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">Embedded Storage</span>
-                <h3>SQLite</h3>
-            </div>
-
-            <div class="skill-card glow-django" data-categories="web db">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <path d="M9 17v-6a3 3 0 0 1 6 0v6M9 13h6"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">Full-Stack Framework</span>
-                <h3>Django (Python)</h3>
-            </div>
-
-            <div class="skill-card glow-php" data-categories="language web">
-                <div class="skill-icon">
-                    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <ellipse cx="12" cy="12" rx="10" ry="5"/>
-                        <path d="M8 10v4M12 10v4M16 10v4"/>
-                    </svg>
-                </div>
-                <span class="skill-cat">Server Interaction</span>
-                <h3>PHP</h3>
+        <!-- Bottom marquee (right-to-left) - uses existing skill cards as source -->
+        <div class="skills-marquee-wrapper marquee-bottom" id="skills-marquee-bottom">
+            <div class="skills-marquee-track" id="skills-marquee-track-bottom">
             </div>
         </div>
     </section>
@@ -193,117 +120,11 @@
             <div class="heading-line"></div>
         </div>
 
-        <div class="projects-grid">
-            <div class="projects-shape">
-                <div class="project-card shape-pos-1">
-                    <div class="card-glow-bg"></div>
-                    <div class="card-content">
-                        <span class="project-tag">WEB APP</span>
-                        <h3>MysticWorld</h3>
-                        <p>Theme park booking system for managing rides and reservations online.</p>
-                        <div class="tech-stack">Django &bull; Python &bull; SQL</div>
-                        <div class="project-links">
-                            <a href="https://benjaminjalani.github.io/mysticworld/" class="btn-demo" target="_blank" rel="noopener noreferrer">Documentation</a>
-                            <a href="https://github.com/benjaminjalani/mysticworld" class="btn-github" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="projects-shape">
-                <div class="project-card shape-pos-1">
-                    <div class="card-glow-bg"></div>
-                    <div class="card-content">
-                        <span class="project-tag">WEB APP</span>
-                        <h3>GlassQR</h3>
-                        <p>glassQR is a premium, client-side web utility designed to generate and parse highly stylized, glassmorphic QR codes completely in the browser.</p>
-                        <div class="tech-stack">HTML &bull; CSS &bull; JavaScript</div>
-                        <div class="project-links">
-                            <a href="https://benjaminjalani.github.io/glassQR/" class="btn-demo" target="_blank" rel="noopener noreferrer">Demo</a>
-                            <a href="https://github.com/benjaminjalani/glassQR" class="btn-github" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="projects-shape">
-                <div class="project-card shape-pos-1">
-                    <div class="card-glow-bg"></div>
-                    <div class="card-content">
-                        <span class="project-tag">WEB APP</span>
-                        <h3>hideItSafe</h3>
-                        <p>hideItSafe is a private web utility that securely encrypts text and images into protected files entirely on your device.</p>
-                        <div class="tech-stack">HTML &bull; CSS &bull; JavaScript</div>
-                        <div class="project-links">
-                            <a href="https://benjaminjalani.github.io/hideItSafe/" class="btn-demo" target="_blank" rel="noopener noreferrer">Demo</a>
-                            <a href="https://github.com/benjaminjalani/hideItSafe" class="btn-github" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="projects-shape">
-                <div class="project-card shape-pos-1">
-                    <div class="card-glow-bg"></div>
-                    <div class="card-content">
-                        <span class="project-tag">WEB GAME</span>
-                        <h3>tictactoe</h3>
-                        <p>tictactoe is an offline web game featuring an unbeatable automated computer adversary driven by real-time lookahead decision trees.</p>
-                        <div class="tech-stack">HTML &bull; CSS &bull; JavaScript</div>
-                        <div class="project-links">
-                            <a href="https://benjaminjalani.github.io/tictactoe/" class="btn-demo" target="_blank" rel="noopener noreferrer">Demo</a>
-                            <a href="https://github.com/benjaminjalani/tictactoe" class="btn-github" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="projects-shape" id="projects-grid">
         </div>
-    </section>  
+    </section>
 
-    
-    <div id="profile-overlay" class="profile-overlay" aria-hidden="true">
-        <div id="profile-modal" class="profile-modal" role="dialog" aria-labelledby="modal-title">
-            <button class="close-profile-btn" onclick="closeProfile()" aria-label="Close Profile Modal">×</button>
 
-            <div class="profile-grid">
-                <div class="profile-sidebar">
-                    <h2 class="sidebar-title" id="modal-title">BENJAMIN J<br><span class="highlight-text">ALANI</span></h2>
-                    <div class="sidebar-divider"></div>
-                </div>
-                <div class="profile-main">
-                    <div class="slideshow">
-                        <div class="slide active-slide">
-                            <h3 class="slide-title">About Me</h3>
-                            <div class="slide-accent-line"></div>
-                            <p class="slide-text">
-                                I am a focused BCA graduate dedicated to producing modern, clean, and interactive digital interfaces. I craft designs that bridge high aesthetic value and efficient backend computation. I specialize in creating custom web apps, structured data pipelines, and premium design patterns. I continuously evolve my technology portfolio to construct high-value solutions.
-                            </p>
-                        </div>
-                        <div class="slide">
-                            <h3 class="slide-title">Tech Expertise</h3>
-                            <div class="slide-accent-line"></div>
-                            <div class="slide-text expertise-grid">
-                                <div class="exp-badge">Systems &amp; OOP</div>
-                                <div class="exp-badge">Full-Stack Django</div>
-                                <div class="exp-badge">Relational SQL</div>
-                                <div class="exp-badge">Creative Motion Web</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slideshow-controls">
-                        <button type="button" class="control-btn" onclick="changeSlide(-1)">PREV</button>
-                        <div class="slide-indicators" id="slide-indicators">
-                            <span class="dot active-dot"></span>
-                            <span class="dot"></span>
-                        </div>
-                        <button type="button" class="control-btn" onclick="changeSlide(1)">NEXT</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Game Zone -->
     <div class="game-zone" id="gamezone">
         <div class="play-page">
             <div class="play-title">Play with BJ<span style="color: var(--yellow);">AI</span></div>
@@ -320,21 +141,19 @@
         </div>
     </div>
 
-    
     <footer id="contact" class="footer">
         <div class="footer-divider"></div>
         <h2>Ready to build something bespoke?</h2>
-        <a href="mailto:benjaminjalany@gmail.com" class="email-link">benjaminjalany@gmail.com</a>
-        
+        <a href="#" class="email-link" id="contact-email"></a>
         <div class="footer-socials">
-            <a href="#" class="social-icon">LinkedIn</a>
+            <a href="#" class="social-icon" id="linkedin-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <span class="social-sep">&bull;</span>
-            <a href="https://github.com/benjaminjalani/" class="social-icon" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer" id="github-link">GitHub</a>
         </div>
         
         <p class="copyright">© 2026 Benjamin J Alani. All Rights Reserved.</p>
     </footer>
-
+    <script src="db.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
